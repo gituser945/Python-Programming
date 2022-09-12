@@ -81,6 +81,15 @@ class AndGate(BinaryGate):
             return 0
 
 
+class NandGate(AndGate):
+
+    def performGateLogic(self):
+        if AndGate.performGateLogic(self) == 1:
+            return 0
+        else:
+            return 1    
+
+
 class OrGate(BinaryGate):
 
     def __init__(self,n):
@@ -92,6 +101,15 @@ class OrGate(BinaryGate):
         b = self.getpinB()
 
         if a == 0 and b == 0:
+            return 0
+        else:
+            return 1  
+
+
+class NorGate(OrGate):
+
+    def performGateLogic(self):
+        if OrGate.performGateLogic(self) == 1:
             return 0
         else:
             return 1
@@ -128,6 +146,19 @@ class Connector:
 
 
 def main():
+
+    g1 = AndGate("G1")
+    g2 = NandGate("G2")
+    print("Nand Gate Result:")
+    print(g2.getOutput())
+
+
+    g1 = OrGate("G1")
+    g2 = NorGate("G2")
+    print("Nor Gate Result:")
+    print(g2.getOutput())
+
+
     g1 = AndGate("G1")
     g2 = AndGate("G2")
     g3 = OrGate("G3")
