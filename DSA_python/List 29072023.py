@@ -46,3 +46,47 @@ def updateList(list,updateitem,updatevalue):
 print(myList)
 updateList(myList,3,'updated value')
 
+# Leetcode problem 1
+
+sentences = ["alice and bob love leetcode", "i think so too", "this is great thanks very much"]
+
+count = []
+for i in range(len(sentences)):
+    count.append(len(sentences[i].split()))
+print(max(count))
+
+count = len(sentences[0].split())
+
+len(sentences[0].split())
+
+# Leetcode problem 2
+
+accounts = [[2,8,7],[7,1,3],[1,9,5]]
+
+maxAmount = []
+for i in range(len(accounts)):
+    maxAmount.append(sum(accounts[i]))
+print(max(maxAmount))
+
+# Leetcode problem 3
+
+nums = [3,1,2,10,1]
+
+newList = []
+j = 0
+for i in range(len(nums)):
+    j += nums[i]
+    newList.append(j)
+
+# Leetcode problem 4
+
+nums = [8,1,2,2,3]
+
+newList = []
+maxElement = max(nums)
+counter = 0
+for i in range(len(nums)):
+    if nums[i] > maxElement:
+        counter += 1
+        newList.append(counter)
+print(newList)
