@@ -24,3 +24,68 @@ import pandas as pd
 def big_countries(world: pd.DataFrame) -> pd.DataFrame:
     output = world.query("population >= 25000000 or area >= 3000000")
     return output[["name","population","area"]]
+
+PROBLEM 2:
+
+Input: 
+Products table:
++-------------+----------+------------+
+| product_id  | low_fats | recyclable |
++-------------+----------+------------+
+| 0           | Y        | N          |
+| 1           | Y        | Y          |
+| 2           | N        | Y          |
+| 3           | Y        | Y          |
+| 4           | N        | N          |
++-------------+----------+------------+
+Output: 
++-------------+
+| product_id  |
++-------------+
+| 1           |
+| 3           |
++-------------+
+Explanation: Only products 1 and 3 are both low fat and recyclable.
+
+import pandas as pd
+
+def find_products(products: pd.DataFrame) -> pd.DataFrame:
+    products = products.query("low_fats == 'Y' and recyclable == 'Y'")
+    return products[['product_id']]
+
+PROBLEM 3:
+
+Input: 
+Customers table:
++----+-------+
+| id | name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+
+Orders table:
++----+------------+
+| id | customerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+
+Output: 
++-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+
+
+import pandas as pd
+
+def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    combinedTable = pd.merge(customers,orders,left_on='id',right_on='customerId',how="left")
+    combinedTable = combinedTable.fillna(0)
+    combinedTable = combinedTable.query("id_y == 0 and customerId == 0")
+    combinedTable = combinedTable[["name"]]
+    combinedTable =  combinedTable.rename(columns = {'name':'Customers'})
+    return combinedTable
