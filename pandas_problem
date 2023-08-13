@@ -89,3 +89,33 @@ def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFram
     combinedTable = combinedTable[["name"]]
     combinedTable =  combinedTable.rename(columns = {'name':'Customers'})
     return combinedTable
+
+PROBLEM 4:
+
+Input: 
+Views table:
++------------+-----------+-----------+------------+
+| article_id | author_id | viewer_id | view_date  |
++------------+-----------+-----------+------------+
+| 1          | 3         | 5         | 2019-08-01 |
+| 1          | 3         | 6         | 2019-08-02 |
+| 2          | 7         | 7         | 2019-08-01 |
+| 2          | 7         | 6         | 2019-08-02 |
+| 4          | 7         | 1         | 2019-07-22 |
+| 3          | 4         | 4         | 2019-07-21 |
+| 3          | 4         | 4         | 2019-07-21 |
++------------+-----------+-----------+------------+
+Output: 
++------+
+| id   |
++------+
+| 4    |
+| 7    |
++------+
+
+import pandas as pd
+
+def article_views(views: pd.DataFrame) -> pd.DataFrame:
+    views = views.query("author_id == viewer_id").drop_duplicates().sort_values(by='author_id')
+    views = views.rename(columns = {'author_id':'id'})
+    return views[["id"]].drop_duplicates()
