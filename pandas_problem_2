@@ -1,3 +1,5 @@
+PROBLEM 1:
+
 Input: 
 Employees table:
 +-------------+---------+--------+
@@ -30,3 +32,28 @@ import numpy as np
 def calculate_special_bonus(employees: pd.DataFrame) -> pd.DataFrame:
     employees['bonus'] = np.where((employees['employee_id'] % 2 != 0) & (~employees['name'].str.startswith('M')),employees['salary'],0)
     return employees[["employee_id","bonus"]].sort_values(by = ['employee_id'])
+
+
+PROBLEM 2:
+
+Input: 
+Users table:
++---------+-------+
+| user_id | name  |
++---------+-------+
+| 1       | aLice |
+| 2       | bOB   |
++---------+-------+
+Output: 
++---------+-------+
+| user_id | name  |
++---------+-------+
+| 1       | Alice |
+| 2       | Bob   |
++---------+-------+
+
+import pandas as pd
+
+def fix_names(users: pd.DataFrame) -> pd.DataFrame:
+    users['name'] = users['name'].str.capitalize()
+    return users.sort_values(by = ['user_id'])
