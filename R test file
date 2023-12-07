@@ -1,0 +1,19 @@
+library(tidyverse)
+
+setwd("")
+
+file_2 <- readxl::read_xlsx("Book1.xlsx")
+
+
+for(i in 1:nrow(file_2))
+{
+  min_regex <- regmatches(file_2$prop_code[i],gregexpr("\\d+",file_2$prop_code[i]))[[1]]
+  min_value <- min(as.numeric(min_regex))
+  max_regex <- regmatches(file_2$prop_code[i],gregexpr("\\d+",file_2$prop_code[i]))[[1]]
+  max_value <- max(as.numeric(max_regex))
+  file_2$prop_code[i] <- paste0(min_value,":",max_value)
+}
+
+
+library(diffr)
+diffr(prop_code_test_2.R,prop_code_test.R)
